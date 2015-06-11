@@ -1,0 +1,16 @@
+{
+    "contents" : "rm(list=ls(all.names = TRUE))\n\n\n# Connector\nlibrary(httr)\nlibrary(XML)\n\nurl = \"http://tw.stock.yahoo.com/d/s/major_2451.html\"\nres <- GET(url)\ncontent(res, \"text\", encoding = \"big5\")\nhtml <- htmlParse(content(res, \"text\", encoding = \"big5\"), encoding = \"utf8\")\n\n\n\n# Parser\n# library(stringr)\n\ntables <- readHTMLTable(html)\n\n# try: which table has data?\nView(tables[[8]])\nView(tables[[9]])\nView(tables[[10]])\n\nsapply(tables,NCOL)\nsapply(tables,NROW)\n\n# figure out filtering condition ... \nfilter_condition <- (sapply(tables,NCOL)==8)&(sapply(tables,NROW) <= 15)\ndata_table <- tables[filter_condition][[1]]\n\n\n# double chech !\nView(data_table)\n\n# extract date info\nDataString_source = content(res, \"text\", encoding = \"big5\")\n# DataString_regexp <- \"([[:digit:]]{3}) /([[:digit:]]{2}) /([[:digit:]]{2})\"\n# DataString_Location = str_locate_all(DataString_source,DataString_regexp)[[1]]\n# DataString = str_sub(DataString_source, DataString_Location[1],DataString_Location[2])\nDateString = regmatches(DataString_source,regexpr(\"([0-9]+) /([0-9]+) /([0-9]+)\",DataString_source))\nDateVector = as.numeric(unlist(strsplit(DateString,split = \" /\")))\nDateVector[1] = DateVector[1] + 1911\nDataDate = as.Date(paste(DateVector,collapse = \"-\"))\n\n# change the data type of each column\nData_Table = data_table\nData_Table[,1] = as.factor(Data_Table[,1])\nData_Table[,2] = as.integer(as.character(Data_Table[,2]))\nData_Table[,3] = as.integer(as.character(Data_Table[,3]))\nData_Table[,4] = as.integer(as.character(Data_Table[,4]))\nData_Table[,5] = as.factor(Data_Table[,5])\nData_Table[,6] = as.integer(as.character(Data_Table[,6]))\nData_Table[,7] = as.integer(as.character(Data_Table[,7]))\nData_Table[,8] = as.integer(as.character(Data_Table[,8]))\n\nView(Data_Table)\n\n\n# Convert data to table in db\n\nrbind(Data_Table[,1:3],Data_Table[,5:7])\n\nnames(Data_Table)[c(1,5)] <- \"Broker\"\nData_Table <- rbind(Data_Table[,1:3],Data_Table[,5:7])\n\nnames(Data_Table)\nnames(Data_Table)[2:3]<-c(\"Buy\",\"Sell\")\n\nstockId = \"2451\"\nData_Table = data.frame(StockId=stockId,Date=DataDate,Data_Table)\n\nView(Data_Table)\n",
+    "created" : 1431631871120.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "947482423",
+    "id" : "A8652A7A",
+    "lastKnownWriteTime" : 1430991380,
+    "path" : "/project/CaseStudies/Case1YahooKimoStockMajor/try.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

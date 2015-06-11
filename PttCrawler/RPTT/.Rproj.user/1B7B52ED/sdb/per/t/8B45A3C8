@@ -1,0 +1,16 @@
+{
+    "contents" : "\nrm(list=ls(all.names = TRUE))\n\nsource(\"packIntoFunction.R\")\n\nlistPageUrls = getListPageUrls(\"Gossiping\")[1:5]\nlistPageUrls\n\npostUrls = unlist(lapply(listPageUrls,getPostUrls))\npostUrls\n\ngetPostData(\"https://www.ptt.cc/bbs/Gossiping/M.1431338763.A.1BF.html\")\ngetPostData(postUrls[2])\npostData = lapply(postUrls[3:5],getPostData)\n\npostDf = data.frame(do.call(rbind,lapply(postData,function(xx) xx$postData)))\npushDf = do.call(rbind,lapply(postData,function(xx) xx$pushDf))\n",
+    "created" : 1431440792844.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2511869469",
+    "id" : "8B45A3C8",
+    "lastKnownWriteTime" : 1431440358,
+    "path" : "/project/CaseStudies/Case6PttGossiping/test.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

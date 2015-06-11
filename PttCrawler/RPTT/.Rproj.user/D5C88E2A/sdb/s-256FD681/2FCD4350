@@ -1,0 +1,16 @@
+{
+    "contents" : "\nlibrary(httr)\n# install.packages(\"jpeg\")\nlibrary(jpeg)\nlibrary(CSS)\nlibrary(XML)\n\nres1 = GET(\"http://lvr.land.moi.gov.tw/N11/homePage.action\")\ncookies(res1)\n\nres2 = GET(\"http://lvr.land.moi.gov.tw/N11/ImageNumberN13?\")\ncaptcha <- content(res2)\nplot(0:1, 0:1, type = \"n\")\nrasterImage(captcha, 0, 0, 1, 1)\n\nres1Node = content(res1)\nres1Node[\"//form//input\"]\n",
+    "created" : 1431512033190.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2065873352",
+    "id" : "2FCD4350",
+    "lastKnownWriteTime" : 1431050542,
+    "path" : "/project/CaseStudies/Case7LandMoiGov/try.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

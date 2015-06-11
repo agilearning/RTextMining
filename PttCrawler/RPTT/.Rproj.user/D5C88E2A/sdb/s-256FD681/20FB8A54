@@ -1,0 +1,16 @@
+{
+    "contents" : "\nlibrary(httr)\nlibrary(CSS)\n\nres = GET(\"http://railway.hinet.net/\")\ncookies(res)\ncontent(res,\"text\",encoding = \"big5\")\n\nres2 = GET(\"http://railway.hinet.net/Public/Images/title_bg.jpg\")\ncookies(res2)\ncontent(res2)\n\nres3 = GET(\"http://railway.hinet.net/ctno1.htm\")\ncookies(res3)\ncontent(res3,\"text\",encoding = \"big5\")\n\n\nres4 = POST(\"http://railway.hinet.net/check_ctno1.jsp\",\n            body = \"person_id=P123261862&from_station=100&to_station=115&getin_date=2015%2F05%2F18-04&train_no=655&order_qty_str=1&t_order_qty_str=0&n_order_qty_str=1&d_order_qty_str=0&b_order_qty_str=0&z_order_qty_str=0&returnTicket=0\",\n            add_headers(Referer = \"http://railway.hinet.net/ctno1.htm\")\n            )\n\ncookies(res4)\ncontent(res4,encoding = \"utf8\")\n\nres4 = POST(\"http://railway.hinet.net/check_ctno1.jsp\",\n            body = list(person_id=\"P123261862\",\n                        from_station=\"100\",\n                        to_station=\"115\",\n                        getin_date=\"2015/05/18-04\",\n                        train_no=\"655\",\n                        order_qty_str=\"1\",\n                        t_order_qty_str=\"0\",\n                        n_order_qty_str=\"1\",\n                        d_order_qty_str=\"0\",\n                        b_order_qty_str=\"0\",\n                        z_order_qty_str=\"0\",\n                        returnTicket=\"0\"),\n            add_headers(referer = \"http://railway.hinet.net/ctno1.htm\")\n            )\n\ncookies(res4)\nheaders(res4)\ncontent(res4)\n",
+    "created" : 1431611170878.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1316122034",
+    "id" : "20FB8A54",
+    "lastKnownWriteTime" : 1431633000,
+    "path" : "/project/Try/railway_hinet.R",
+    "project_path" : null,
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

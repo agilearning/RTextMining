@@ -1,0 +1,16 @@
+{
+    "contents" : "Package: RPTT\nType: Package\nTitle: What the package does (short line)\nVersion: 0.0.1\nDate: 2015-05-12\nAuthor: Chia-Chi Chang<c3h3.tw@gmail.com>\nMaintainer: Chia-Chi Chang<c3h3.tw@gmail.com>\nDescription: More about what it does (maybe more than one line)\nLicense: What license is it under?\nDepends: httr, CSS",
+    "created" : 1431440635390.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1771831231",
+    "id" : "E497BC31",
+    "lastKnownWriteTime" : 1431441392,
+    "path" : "/project/CaseStudies/Case6PttGossiping/RPTT/DESCRIPTION",
+    "project_path" : "DESCRIPTION",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "dcf"
+}
