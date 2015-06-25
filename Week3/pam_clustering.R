@@ -22,7 +22,7 @@ inspect(tdm)
 
 dtm <- t(as.matrix(tdm))
 
-# install.packages("fpc")
+install.packages("fpc")
 library(fpc)
 pamResult <- pamk(dtm, metric="manhattan")
 (k <- pamResult$nc)
@@ -31,3 +31,12 @@ for (i in 1:k) {
   cat(paste("cluster", i, ": "))
   cat(colnames(pamResult$medoids)[which(pamResult$medoids[i,]==1)], "\n")
 }
+
+m = dbscan(dtm,eps = 2)
+Labels = c(rep("G",length(GData)),rep("HP",length(HPData)))
+
+df = data.frame(Labels,m$cluster)
+names(df) = c("labels","cluster")
+
+df %>% group_by(labels,cluster) %>% summarise(n())
+

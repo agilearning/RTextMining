@@ -7,7 +7,7 @@ AllData <- c(GData, HPData)
 library(jiebaR)
 mixseg = worker()
 
-messages = unlist(allData)
+messages = unlist(AllData)
 
 segRes = lapply(messages,function(msg) mixseg <= msg)
 paste(segRes[[1]],collapse = " ")

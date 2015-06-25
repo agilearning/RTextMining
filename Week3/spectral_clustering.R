@@ -23,5 +23,14 @@ inspect(tdm)
 dtm <- t(as.matrix(tdm))
 
 # install.packages("kernlab")
+
 library(kernlab)
-sc <- specc(dtm, centers=10)
+k = 70
+sc <- specc(dtm, centers=k)
+
+for (i in 1:k) {
+  cat(paste("cluster ", i, ": ", sep=""))
+  s <- colnames(dtm)[order(sc@centers[i,]) > 0]
+  cat(s, "\n")
+}
+
