@@ -23,7 +23,7 @@ getListPageUrls = function(boardName){
   node = content(res, encoding = "utf8")
   
   node[cssToXpath("div.btn-group.pull-right > a")]
-  maxPage = as.numeric(gsub(".html","",unlist(strsplit(xmlAttrs(node[cssToXpath("div.btn-group.pull-right > a")][[2]])["href"],split = "index"))[2]))
+  maxPage = as.numeric(gsub(".html","",unlist(strsplit(xmlAttrs(node[cssToXpath("div.btn-group.pull-right > a")][[2]])["href"],split = "index"))[2]))+1
   
   allListPages = c("",1:maxPage)
   allListUrls = sapply(allListPages,function(page){
@@ -93,8 +93,8 @@ getPostData = function(postUrl){
   postData$Title = metaTemp[2]
   postData$Time = metaTemp[3]
   
-  removeNodes(node[cssToXpath(".article-metaline-right > .article-meta-value")])
-  removeNodes(node[cssToXpath(".article-metaline > .article-meta-value")])
+  # removeNodes(node[cssToXpath(".article-metaline-right > .article-meta-value")])
+  # removeNodes(node[cssToXpath(".article-metaline > .article-meta-value")])
   
   postData$Text = xmlValue(node[cssToXpath("#main-content")][[1]])
   
@@ -109,10 +109,12 @@ getPostData = function(postUrl){
   })
   
   
-  pushDf = data.frame(postId = postData$postId,
-                      postUrl = postUrl,
-                      do.call(rbind,pustData),stringsAsFactors = FALSE)
-  
+  pushDf=NULL
+  if (length(pustData)>0){
+    pushDf = data.frame(postId = postData$postId,
+                        postUrl = postUrl,
+                        do.call(rbind,pustData),stringsAsFactors = FALSE)
+  }
   # function output: 
   list(postData=postData,pushDf=pushDf)
   
